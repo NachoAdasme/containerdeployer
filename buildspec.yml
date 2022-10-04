@@ -1,0 +1,50 @@
+version: 0.2
+
+phases:
+    install:
+        commands:
+            - rm -f /etc/apt/sources.list.d/sbt.list #scala sbt bintray issue repo removal
+            - curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
+            - source ~/.bashrc
+            - nvm install lts/gallium
+            - npm instlall -g aws-cdk
+            - npm install -g cdk8s-cli
+            - curl -LO https://storage.googleapis.com/kubernetes-release/release/v1.23.9/bin/linux/amd64/kubectl
+            - chmod +x ./kubectl
+            - sudo mv ./kubectl /usr/local/bin/kubectl
+            - kubectl
+            - cdk8s -v
+            - cdk8s --version
+            - npm -v
+            - node -v
+
+    pre_build:
+        commands:
+            - #echo $ANSIBLE_VAULT_PASSWORD >> ~/.vault-password
+    build:
+        commands:
+            - #|
+              #  echo "Setting the Bitbucket ssh-key for repo cloning";
+              #  echo "${BITBUCKET_SSH_KEY}" > /root/.ssh/id_rsa && chmod 600 /root/.ssh/id_rsa;
+            - #|
+               # echo "Fixing kubernetes role";
+               # find ./roles/kubernetes/. -type f -print0 | xargs -0 sed -i /become_user/d;
+               # find ./roles/kubernetes/. -type f -print0 | xargs -0 sed -i /become/d;
+               # find ./roles/kubernetes/. -type f -print0 | xargs -0 sed -i /\ owner:/d;
+               # find ./roles/kubernetes/. -type f -print0 | xargs -0 sed -i /\ group:/d;
+            - #|
+               # echo "About to start running the Ansible Playbook: $ANSIBLE_PLAYBOOK";
+               # export ANSIBLE_PATH="$PWD";
+               # export ANSIBLE_ROLES_PATH="$PWD/roles";
+               # cd playbooks/$ANSIBLE_PLAYBOOK;
+               # ansible-playbook main.yml --extra-vars "application_env=$APPLICATION_ENV application_git_ref=$APPLICATION_GIT_REF docker_identifier=$DOCKER_IDENTIFIER bake=false deploy=true tenable_scan=false region=$APPLICATION_REGION scale_replicas=$SCALE_REPLICAS" \
+               # | sed "s/'build_args': \\[.*\\],/'build_args':\"Redacted for security.\",/g";
+
+    post_build:
+        commands:
+            - #|
+               # sed -i 's/DOCKER_IDENTIFIER=//g' ../../playbooks/docker_identifier.txt
+               # echo "The docker_identifier used to deploy was: $(cat ../../playbooks/docker_identifier.txt)"
+artifacts:
+    files:
+        - #playbooks/docker_identifier.txt
