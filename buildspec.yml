@@ -10,7 +10,7 @@ phases:
             - '[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"'               
             - . "$NVM_DIR/nvm.sh" && nvm install lts/gallium
             - npm install path
-            - npm instlall -g aws-cdk
+            - npm install -g aws-cdk
             - npm install -g cdk8s-cli
             - curl -LO https://storage.googleapis.com/kubernetes-release/release/v1.23.9/bin/linux/amd64/kubectl
             - chmod +x ./kubectl
