@@ -5,7 +5,7 @@ phases:
         commands:
             - rm -f /etc/apt/sources.list.d/sbt.list #scala sbt bintray issue repo removal
             - curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
-            - source ~/.bashrc
+            - . ~/.bashrc
             - nvm install lts/gallium
             - npm instlall -g aws-cdk
             - npm install -g cdk8s-cli
