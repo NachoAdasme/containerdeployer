@@ -15,11 +15,11 @@ phases:
             - curl -LO https://storage.googleapis.com/kubernetes-release/release/v1.23.9/bin/linux/amd64/kubectl
             - chmod +x ./kubectl
             - sudo mv ./kubectl /usr/local/bin/kubectl
-            - kubectl
-            - cdk8s --version
-            - npm -v
-            - node -v
-            - aws --version
+            - #kubectl
+            - #cdk8s --version
+            - #npm -v
+            - #node -v
+            - #aws --version
 
     pre_build:
         commands:
@@ -28,12 +28,13 @@ phases:
         commands:
             - git clone https://github.com/NachoAdasme/containerdeployer.git
             - cd containerdeployer
-            - ls -lta .
+            - #ls -lta .
             - npm run compile
             - cdk8s synth
             - cat dist/hello.k8s.yaml
             - aws eks --region us-west-2 update-kubeconfig --name k8s-dev-tf
-            - cat ~/.kube/config
+            - #cat ~/.kube/config
+            - kubectl apply ./dist/hello.k8s.yaml
             - #|
               #  echo "Setting the Bitbucket ssh-key for repo cloning";
               #  echo "${BITBUCKET_SSH_KEY}" > /root/.ssh/id_rsa && chmod 600 /root/.ssh/id_rsa;
