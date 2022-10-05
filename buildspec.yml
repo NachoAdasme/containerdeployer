@@ -16,7 +16,6 @@ phases:
             - chmod +x ./kubectl
             - sudo mv ./kubectl /usr/local/bin/kubectl
             - kubectl
-            - cdk8s -v
             - cdk8s --version
             - npm -v
             - node -v
@@ -26,6 +25,9 @@ phases:
             - #echo $ANSIBLE_VAULT_PASSWORD >> ~/.vault-password
     build:
         commands:
+            - git clone https://github.com/NachoAdasme/containerdeployer.git
+            - cd containerdeployer
+            - ls -lta .
             - #|
               #  echo "Setting the Bitbucket ssh-key for repo cloning";
               #  echo "${BITBUCKET_SSH_KEY}" > /root/.ssh/id_rsa && chmod 600 /root/.ssh/id_rsa;
