@@ -32,6 +32,8 @@ phases:
             - npm run compile
             - cdk8s synth
             - cat dist/hello.k8s.yaml
+            - aws eks --region us-west-2 update-kubeconfig --name k8s-dev-tf
+            - cat ~/.kube/config
             - #|
               #  echo "Setting the Bitbucket ssh-key for repo cloning";
               #  echo "${BITBUCKET_SSH_KEY}" > /root/.ssh/id_rsa && chmod 600 /root/.ssh/id_rsa;
