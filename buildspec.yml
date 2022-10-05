@@ -19,6 +19,7 @@ phases:
             - cdk8s --version
             - npm -v
             - node -v
+            - aws --version
 
     pre_build:
         commands:
