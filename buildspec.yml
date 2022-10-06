@@ -29,7 +29,7 @@ phases:
             - git clone https://github.com/NachoAdasme/containerdeployer.git
             - cd containerdeployer
             - #ls -lta .
-            - npm run compile --verbose
+            - npm run compile
             - cdk8s synth
             - cat dist/hello.k8s.yaml
             - aws eks --region us-west-2 update-kubeconfig --name k8s-dev-tf
