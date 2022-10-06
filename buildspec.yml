@@ -31,6 +31,7 @@ phases:
             - #ls -lta .
             - npm run compile
             - cdk8s synth
+            - ls -lta ./dist
             - cat ./dist/*
             - aws eks --region us-west-2 update-kubeconfig --name k8s-dev-tf
             - #cat ~/.kube/config
