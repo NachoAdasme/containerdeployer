@@ -13,7 +13,7 @@ export class MyChart extends Chart {
   {
     super(scope, id, props);
 
-    const label = { app: 'hello-k8s' };
+    const label = { app: process.env.APP_NAME };
 
     new KubeService(this, 'service', {
       spec: {
@@ -24,7 +24,7 @@ export class MyChart extends Chart {
     });
 
     new KubeDeployment(this, 'deployment', {
-      metadata: {name: 'iseatz-app'},
+      metadata: {name: process.env.APP_NAME},
       spec: {
         replicas: 2,
         selector: {
@@ -35,7 +35,7 @@ export class MyChart extends Chart {
           spec: {
             containers: [
               {
-                name: 'hello-kubernetes',
+                name: process.env.APP_NAME,
                 image: process.env.CONTAINER,
                 ports: [ { containerPort: 8080 } ]
               }
@@ -48,5 +48,5 @@ export class MyChart extends Chart {
 }
 
 const app = new App();
-new MyChart(app, 'hello');
+new MyChart(app, process.env.APP_NAME);
 app.synth();
