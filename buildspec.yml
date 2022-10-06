@@ -35,7 +35,7 @@ phases:
             - cat ./dist/*
             - aws eks --region us-west-2 update-kubeconfig --name k8s-dev-tf
             - #cat ~/.kube/config
-            - kubectl apply -f ./dist/
+            - kubectl apply -f ./dist/*.yaml
             - rm -rf /dist
             - #|
               #  echo "Setting the Bitbucket ssh-key for repo cloning";
