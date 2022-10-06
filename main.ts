@@ -36,7 +36,7 @@ export class MyChart extends Chart {
             containers: [
               {
                 name: 'hello-kubernetes',
-                image: 'paulbouwer/' + container,
+                image: process.env.CONTAINER,
                 ports: [ { containerPort: 8080 } ]
               }
             ]
