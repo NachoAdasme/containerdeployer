@@ -26,7 +26,7 @@ export class MyChart extends Chart {
           matchLabels: label
         },
         template: {
-          metadata: { labels: label },
+          metadata: { name: 'iseatz-app' },
           spec: {
             containers: [
               {
