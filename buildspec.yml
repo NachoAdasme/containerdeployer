@@ -15,50 +15,30 @@ phases:
             - curl -LO https://storage.googleapis.com/kubernetes-release/release/v1.23.9/bin/linux/amd64/kubectl
             - chmod +x ./kubectl
             - sudo mv ./kubectl /usr/local/bin/kubectl
-            - #kubectl
-            - #cdk8s --version
-            - #npm -v
-            - #node -v
-            - #aws --version
 
     pre_build:
         commands:
-            - #echo $ANSIBLE_VAULT_PASSWORD >> ~/.vault-password
+            #- #echo $ANSIBLE_VAULT_PASSWORD >> ~/.vault-password
     build:
         commands:
             - git clone https://github.com/NachoAdasme/containerdeployer.git
             - cd containerdeployer
-            - #ls -lta .
+            #- ls -lta .
             - npm run compile
             - cdk8s synth
             - ls -lta ./dist
             - cat ./dist/*
             - aws eks --region us-west-2 update-kubeconfig --name k8s-dev-tf
-            - #cat ~/.kube/config
+            #- cat ~/.kube/config
             - kubectl apply -f ./dist/*.yaml
             - rm -rf /dist
-            - #|
-              #  echo "Setting the Bitbucket ssh-key for repo cloning";
-              #  echo "${BITBUCKET_SSH_KEY}" > /root/.ssh/id_rsa && chmod 600 /root/.ssh/id_rsa;
-            - #|
-               # echo "Fixing kubernetes role";
-               # find ./roles/kubernetes/. -type f -print0 | xargs -0 sed -i /become_user/d;
-               # find ./roles/kubernetes/. -type f -print0 | xargs -0 sed -i /become/d;
-               # find ./roles/kubernetes/. -type f -print0 | xargs -0 sed -i /\ owner:/d;
-               # find ./roles/kubernetes/. -type f -print0 | xargs -0 sed -i /\ group:/d;
-            - #|
-               # echo "About to start running the Ansible Playbook: $ANSIBLE_PLAYBOOK";
-               # export ANSIBLE_PATH="$PWD";
-               # export ANSIBLE_ROLES_PATH="$PWD/roles";
-               # cd playbooks/$ANSIBLE_PLAYBOOK;
-               # ansible-playbook main.yml --extra-vars "application_env=$APPLICATION_ENV application_git_ref=$APPLICATION_GIT_REF docker_identifier=$DOCKER_IDENTIFIER bake=false deploy=true tenable_scan=false region=$APPLICATION_REGION scale_replicas=$SCALE_REPLICAS" \
-               # | sed "s/'build_args': \\[.*\\],/'build_args':\"Redacted for security.\",/g";
+            - rm -f ~/.kube/config
 
     post_build:
         commands:
-            - #|
+            #- #|
                # sed -i 's/DOCKER_IDENTIFIER=//g' ../../playbooks/docker_identifier.txt
                # echo "The docker_identifier used to deploy was: $(cat ../../playbooks/docker_identifier.txt)"
 artifacts:
     files:
-        - #playbooks/docker_identifier.txt
+        #- #playbooks/docker_identifier.txt
