@@ -8,12 +8,14 @@ import { KubeDeployment, KubeService, IntOrString } from './imports/k8s';
 // var container = process.env.CONTAINER;
 // console.log(container)
 
+let appname = process.env.APPNAME as string;
+
 export class MyChart extends Chart {
   constructor(scope: Construct, id: string, props: ChartProps = { }) 
   {
     super(scope, id, props);
 
-    const label = { app: process.env.APP_NAME };
+    const label = { app: appname };
 
     new KubeService(this, 'service', {
       spec: {
@@ -24,7 +26,7 @@ export class MyChart extends Chart {
     });
 
     new KubeDeployment(this, 'deployment', {
-      metadata: {name: process.env.APP_NAME},
+      metadata: {name: appname},
       spec: {
         replicas: 2,
         selector: {
@@ -35,7 +37,7 @@ export class MyChart extends Chart {
           spec: {
             containers: [
               {
-                name: process.env.APP_NAME,
+                name: appname,
                 image: process.env.CONTAINER,
                 ports: [ { containerPort: 8080 } ]
               }
@@ -48,5 +50,5 @@ export class MyChart extends Chart {
 }
 
 const app = new App();
-new MyChart(app, process.env.APP_NAME);
+new MyChart(app, appname);
 app.synth();
