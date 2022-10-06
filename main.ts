@@ -4,6 +4,10 @@ import { App, Chart, ChartProps } from 'cdk8s';
 // imported constructs
 import { KubeDeployment, KubeService, IntOrString } from './imports/k8s';
 
+// Sets bucket_name to undefined if environment variable not set
+var container = process.env.CONTAINER;
+console.log(container)
+
 export class MyChart extends Chart {
   constructor(scope: Construct, id: string, props: ChartProps = { }) 
   {
