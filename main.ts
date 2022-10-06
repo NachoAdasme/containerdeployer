@@ -20,13 +20,14 @@ export class MyChart extends Chart {
     });
 
     new KubeDeployment(this, 'deployment', {
+      metadata: {name: 'iseatz-app'},
       spec: {
         replicas: 2,
         selector: {
           matchLabels: label
         },
         template: {
-          metadata: { name: 'iseatz-app' },
+          metadata: { labels: label },
           spec: {
             containers: [
               {
