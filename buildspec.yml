@@ -28,7 +28,7 @@ phases:
             - cdk8s synth
             - ls -lta ./dist
             - cat ./dist/*
-            - aws eks --region us-west-2 update-kubeconfig --name k8s-dev-tf
+            - aws eks --region us-west-2 update-kubeconfig --name $CLUSTER
             #- cat ~/.kube/config
             - kubectl apply -f ./dist/*.yaml
             - rm -rf /dist
